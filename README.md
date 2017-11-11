@@ -1,5 +1,5 @@
 
-# MiniDB (Simple NoSQL - Key/Value Pair Storage Manager) 
+# NoJava (Simple NoSQL - Key/Value Pair Storage Manager) 
 # Based on Shore DB SM (Release 2.0) + Java NIO
 
     http://research.cs.wisc.edu/shore/      (Archived Site)
