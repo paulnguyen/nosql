@@ -5,9 +5,10 @@
 
 * https://gradle.org/guides/#getting-started
 
-## Shakespeare Plays in JSON 
+## Shakespeare Plays in JSON & XML
 
 * https://github.com/Submanifold/Shakespeare
+* https://www.ibiblio.org/xml/examples/shakespeare/
 
 ## Based on Shore DB SM (Release 2.0) + Java NIO
 
