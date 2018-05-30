@@ -1,48 +1,67 @@
-
-all: clean 
+all: clean
 
 clean: 
+	find . -name "*.class" -exec rm -rf {} \;
 	rm -rf build/*
 	rm -f *.db
 
+
+# Gradle: 		https://guides.gradle.org/creating-new-gradle-builds/
+# CircleCI:		https://circleci.com/docs/2.0/language-java/
+
+gradle-init:
+	gradle init
+
+gradle-build:
+	gradle build -x test 
+
+gradle-test:
+	gradle test
+
+jar: gradle-build
+	gradle shadowJar
+
+run: 
+	java -cp build/libs/nojava-all.jar nojava.SMImplVersion2
+
+
+###
+### Old School Unit Testing & Debugging (Not Using Gradle)
+###
+
 aspects:
-	ajc -1.5 -inpath lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar -sourceroots src -d build
+	ajc -1.5 -inpath libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar -sourceroots src/main/java -d build
 
 java:
-	ajc -1.5 -inpath lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar -d build src/*.java
+	ajc -1.5 -inpath libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar -d build src/main/java/nojava/*.java
 
-compile:
-	javac -cp lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar -d build src/*.java
+compile-tests:
+	javac -cp ./build:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar -d build src/test/java/nojava/*.java
 	
 vol:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar Volume
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar nojava.Volume
 
 run0:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar SMImplVersion0
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar nojava.SMImplVersion0
 
 run1:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar SMImplVersion1
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar nojava.SMImplVersion1
 	
 run2:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar SMImplVersion2
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar nojava.SMImplVersion2
 	
 test1:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar junit.textui.TestRunner TestAcceptanceBasic
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar junit.textui.TestRunner nojava.TestAcceptanceBasic
 	
 test2:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar junit.textui.TestRunner TestAcceptanceCrossFunctional
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar junit.textui.TestRunner nojava.TestAcceptanceCrossFunctional
 	
 test3:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar junit.textui.TestRunner TestAcceptanceOID
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar junit.textui.TestRunner nojava.TestAcceptanceOID
 	
 test4:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar junit.textui.TestRunner TestStressLargeRecords
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar junit.textui.TestRunner nojava.TestStressLargeRecords
 	
 test5:
-	java -cp ./build:lib/aspectjrt.jar:lib/jakarta-poi.jar:lib/junit.jar:lib/log4j.jar junit.textui.TestRunner TestXMLFileLoad
-	
-	
-	
-	
-	
+	java -cp ./build:libs/aspectjrt.jar:libs/jakarta-poi.jar:libs/junit.jar:libs/log4j.jar junit.textui.TestRunner nojava.TestXMLFileLoad
 	
