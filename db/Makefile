@@ -24,6 +24,9 @@ jar: gradle-build
 run: 
 	java -cp build/libs/nojava-all.jar nojava.SMImplVersion2
 
+dist:
+	rm -f ../all/libs/nojava-all.jar
+	cp ./build/libs/nojava-all.jar ../api/libs
 
 ###
 ### Old School Unit Testing & Debugging (Not Using Gradle)

@@ -158,7 +158,7 @@ public interface SM {
      *@exception  SMException  Description of Exception
      *@since
      */
-    Record(int size) throws SMException {
+    public Record(int size) throws SMException {
       try {
         data = new byte[size];
       } catch (java.lang.OutOfMemoryError oome) {
@@ -232,6 +232,17 @@ public interface SM {
     public byte[] getBytes(long pos, long length) {
 	    return data ;
     }
+
+    /**
+     *  Gets the bytes attribute of the Record object
+     *
+     *@return    The bytes value
+     *@since
+     */
+    public byte[] getBytes() {
+      return getBytes(0, 0);
+    }
+
 
     /**
      *  Returns the length of the Record.
