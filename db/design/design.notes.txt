@@ -22,7 +22,7 @@
   bits of a record id.  The slot offsets will determine which blocks the record data is in.  
   Multi-block records will be marked in multiple slots with the record's page/block bit values.
   No Record Linked Lists for now.  Basically, a full scan of the slot table is needed currently to
-  assemble a multi-block record.  I will fix this this weekend.
+  assemble a multi-block record.  
 
 - Small Records currently take up at lease one block.  Many small records should fit into a block.  
   Logical OID to Physical OID mapping table used with the Record class.
@@ -37,7 +37,7 @@
 - Get Record
 1. Mount Volume (if not already mounted)
 2. Using OID, compute the volume, page, (block is not needed)
-   (Volume should be ZERO (hardcoded for now), until we have more than one.
+   Volume should be ZERO (hardcoded for now), until we have more than one.
 3. Ask Volume for the page (computed from OID/Rec ID)
 4. Ask Page for the Record (passing the entire OID).  Page will validate and search
    slot table for blocks and assemble the record.

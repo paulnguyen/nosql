@@ -19,7 +19,7 @@ public class SMImplVersion3 implements SM {
   
   private Volume master_volume = null ;   // volume id = 0
   private Volume data_volume = null ;     // volume id = 1 
-  private Volume index_volume = null ;    // volume id = 2
+  //private Volume index_volume = null ;    // volume id = 2
   private ByteBuffer translation_table = null ; // guid to recid translation table
   private Hashtable lookupcache = new Hashtable() ; // useful only for translation table lookups, not durable
   
@@ -149,7 +149,7 @@ public class SMImplVersion3 implements SM {
     // mount the bootstrap volume
     master_volume = new Volume(0,"master.db",2,10); // only need two pages, max of 10 pages
     data_volume = new Volume(1,"data.db",50,200);
-    index_volume = new Volume(2,"index.db",10,50);
+    //index_volume = new Volume(2,"index.db",10,50);
 
     // create translation table if needed
     Page m_page = master_volume.getPage(0) ;
@@ -429,7 +429,7 @@ public class SMImplVersion3 implements SM {
    *@exception  IOException  Description of Exception
    *@since
    */
-  public SM.OID store(Record rec) throws IOException {  
+  public synchronized SM.OID store(Record rec) throws IOException {  
 
 	  Record therec = null ;
 	  
@@ -504,7 +504,7 @@ public class SMImplVersion3 implements SM {
    *@exception  IOException        Description of Exception
    *@since
    */
-  public Record fetch(SM.OID oid) throws NotFoundException, IOException {
+  public synchronized Record fetch(SM.OID oid) throws NotFoundException, IOException {
 
     Object smallrec = null;
     smallrec = this.buffer.get(oid.getKey());
@@ -555,7 +555,7 @@ public class SMImplVersion3 implements SM {
   public void close() throws SM.IOException { 
     master_volume.close() ;
     data_volume.close() ;
-    index_volume.close() ;
+    //index_volume.close() ;
   }
 
   public void flush() {
@@ -575,7 +575,7 @@ public class SMImplVersion3 implements SM {
    *@exception  IOException        Description of Exception
    *@since
    */
-  public SM.OID update(SM.OID oid, Record rec) throws NotFoundException, IOException {
+  public synchronized SM.OID update(SM.OID oid, Record rec) throws NotFoundException, IOException {
 
 	  if (rec == null)
 		  throw new IOException() ;
@@ -620,7 +620,7 @@ public class SMImplVersion3 implements SM {
    *@exception  CannotDeleteException  Description of Exception
    *@since
    */
-  public void delete(SM.OID oid) throws NotFoundException, CannotDeleteException {
+  public synchronized void delete(SM.OID oid) throws NotFoundException, CannotDeleteException {
 
     Object rec = null;
     rec = this.buffer.get(oid.getKey());

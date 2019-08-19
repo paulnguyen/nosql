@@ -22,7 +22,9 @@ public class AppServer extends Application {
         Router router = new Router(getContext()) ;      
         router.attach( "/", PingResource.class ) ;  
         router.attach( "/db", RecordResource.class ) ;
-        router.attach( "/db/{key}", RecordResource.class ) ;        
+        router.attach( "/db/{key}", RecordResource.class ) ;   
+        router.attach( "/api", APIResource.class ) ;    
+        router.attach( "/api/{key}", APIResource.class ) ;    
         return router;
     }
 

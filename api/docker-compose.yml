@@ -1,0 +1,21 @@
+
+
+version: "3"
+services:
+  nodes:
+    image: nosql
+    networks:
+      - network   
+    ports:
+      - 9001-9005:9090
+      - 8001-8005:8888
+    environment:
+      - CLUSTER_NAME=NOSQL
+      
+volumes:
+  schemas:
+    external: false
+
+networks:
+  network:
+    driver: bridge

@@ -6,6 +6,8 @@ ADD ./ddump.sh /srv/ddump.sh
 RUN chmod +x /srv/mdump.sh
 RUN chmod +x /srv/ddump.sh
 RUN yum -y install util-linux
+RUN yum -y install iputils
+RUN yum -y install vim 
 WORKDIR /srv
 CMD java -cp /srv/nosql-all.jar api.Main
 
