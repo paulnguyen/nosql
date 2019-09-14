@@ -12,8 +12,8 @@ public class Main {
         AdminServer.startup() ;
         API api = new API() ;
         new Thread(api).start();
-        Sync sync = new Sync() ;
-        new Thread(sync).start();    
+        PingChecks pings = new PingChecks() ;
+        new Thread(pings).start();    
     }
 
 }

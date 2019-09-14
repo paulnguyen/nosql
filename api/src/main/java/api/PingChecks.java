@@ -12,7 +12,7 @@ import org.restlet.data.* ;
 import org.restlet.* ;
 
 
-public class Sync implements Runnable {
+public class PingChecks implements Runnable {
 
 	private AdminServer server = AdminServer.getInstance() ;
 
