@@ -25,6 +25,14 @@ public class APIResource extends ServerResource {
             status.message = "Missing Document Key." ;
             return new JacksonRepresentation<Status>(status) ;
         } else {
+            try {
+                String exists = API.get_document(doc_key) ;
+                setStatus( org.restlet.data.Status.CLIENT_ERROR_BAD_REQUEST ) ;
+                Status status = new Status() ;
+                status.status = "Error!" ;
+                status.message = "Document Exists." ;
+                return new JacksonRepresentation<Status>(status) ;
+            } catch ( Exception e ) { }
         	JsonRepresentation represent = new JsonRepresentation(rep);
             JSONObject jsonobject = represent.getJsonObject();
             String doc_json = jsonobject.toString();

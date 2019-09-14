@@ -1,0 +1,1 @@
+cp /etc/hosts.sav /etc/hosts

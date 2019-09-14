@@ -9,14 +9,14 @@ clean:
 compile:
 	gradle build
 
-jar: compile
+build: compile
 	gradle shadowJar
 
 run: 
 	echo Starting Service at:  http://localhost:9090
 	java -cp build/libs/nosql-all.jar api.Main
 
-docker-build: jar
+docker-build: build
 	docker build -t nosql .
 	docker images
 
@@ -54,11 +54,52 @@ docker-ps:
 docker-ps-ports:
 	 docker ps --all --format "table {{.Names}}\t{{.Ports}}\t"
 
-nosql-up:
-	docker-compose scale nodes=5
+nosql-up: network-create
+	docker-compose scale node=5
 
 nosql-down:
-	docker-compose down 	
+	docker-compose down
+
+shell1:
+	docker exec -it api_node_1 bash 
+
+shell2:
+	docker exec -it api_node_2 bash 
+
+shell3:
+	docker exec -it api_node_3 bash 
+
+shell4:
+	docker exec -it api_node_4 bash 
+
+shell5:
+	docker exec -it api_node_5 bash 
+
+docker-nodes-save:
+	docker exec -it api_node_1 cp /etc/hosts /etc/hosts.sav
+	docker exec -it api_node_2 cp /etc/hosts /etc/hosts.sav
+	docker exec -it api_node_3 cp /etc/hosts /etc/hosts.sav
+	docker exec -it api_node_4 cp /etc/hosts /etc/hosts.sav
+	docker exec -it api_node_5 cp /etc/hosts /etc/hosts.sav
+
+docker-nodes-restore:
+	docker exec -it api_node_1 cp /etc/hosts.sav /etc/hosts
+	docker exec -it api_node_2 cp /etc/hosts.sav /etc/hosts
+	docker exec -it api_node_3 cp /etc/hosts.sav /etc/hosts
+	docker exec -it api_node_4 cp /etc/hosts.sav /etc/hosts
+	docker exec -it api_node_5 cp /etc/hosts.sav /etc/hosts
+
+docker-patch-test:
+	docker exec -it api_node_2 bash /srv/hosts-backup.sh
+	docker exec -it api_node_2 bash /srv/patch1.sh
+	docker exec -it api_node_2 bash /srv/patch2.sh
+	docker exec -it api_node_2 cat /etc/hosts 
+
+docker-patch-restore:
+	docker exec -it api_node_2 bash /srv/hosts-restore.sh
+	docker exec -it api_node_2 cat /etc/hosts 
+
+
 
 
 

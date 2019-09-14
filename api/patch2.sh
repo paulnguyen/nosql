@@ -1,0 +1,1 @@
+echo "192.168.0.0	api_node_2" >> /etc/hosts

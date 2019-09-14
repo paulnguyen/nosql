@@ -97,6 +97,12 @@ public class API implements Runnable {
 	    	System.out.println( "Create Document: Key = " + key + " Value = " + value ) ;
 	    	Document doc = new Document() ;
 	    	doc.key = key ;
+            AdminServer server = AdminServer.getInstance() ;
+            String my_host = server.getMyHostname() ;
+            doc.vclock[0] = my_host ;
+            String my_version = my_host + ":" + Integer.toString(1) ;
+            int my_index = server.nodeIndex( my_host ) ;
+            doc.vclock[my_index] = my_version ;
 	    	KEYMAP_CACHE.put( key, doc ) ;
 	    	doc.json = value ;
 	        CREATE_QUEUE.put( doc ) ; 
@@ -147,10 +153,21 @@ public class API implements Runnable {
 		String jsonText = value ;
 		int size = jsonText.getBytes().length ;
  		try {
+            // store json to db
             record = new SM.Record( size ) ;
             record.setBytes( jsonText.getBytes() ) ;
             update_id = db.update( record_id, record ) ;
             System.out.println( "Document Updated: " + key ) ;
+            // update vclock
+            AdminServer server = AdminServer.getInstance() ;
+            String my_host = server.getMyHostname() ;
+            doc.vclock[0] = my_host ;
+            int my_index = server.nodeIndex( my_host ) ;
+            String old_version = doc.vclock[my_index] ;
+            String[] splits = old_version.split(":") ;
+            int version = Integer.parseInt(splits[1])+1 ;
+            String new_version = my_host + ":" + Integer.toString(version) ;            
+            doc.vclock[my_index] = new_version ;
 			return ;             
         } catch (SM.NotFoundException nfe) {
 			throw new DocumentException( "Document Not Found: " + key ) ;
