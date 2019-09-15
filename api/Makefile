@@ -3,6 +3,8 @@ all: clean
 
 clean:
 	find . -name "*.class" -exec rm -rf {} \;
+	find . -name .DS_Store -exec rm -rf {} \;
+	rm -rf .gradle
 	rm -rf build/*
 	rm -f *.db
 
@@ -12,7 +14,7 @@ compile:
 build: compile
 	gradle shadowJar
 
-run: 
+run: build
 	echo Starting Service at:  http://localhost:9090
 	java -cp build/libs/nosql-all.jar api.Main
 
