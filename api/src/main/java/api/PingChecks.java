@@ -21,8 +21,8 @@ public class PingChecks implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-				// sleep for 10 seconds
-				try { Thread.sleep( 10000 ) ; } catch ( Exception e ) {}  
+				// sleep for 1 second
+				try { Thread.sleep( 1000 ) ; } catch ( Exception e ) {}  
 				// ping & sync nodes
 				Collection<Node> nodes = server.getNodes() ;
     			for (Iterator<Node> iterator = nodes.iterator(); iterator.hasNext();) {

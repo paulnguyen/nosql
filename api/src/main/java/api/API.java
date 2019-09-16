@@ -50,6 +50,7 @@ public class API implements Runnable {
             	doc.record = record_key ;
             	doc.json = "" ;
             	KEYMAP_CACHE.put( doc.key, doc ) ;    
+                
 			} catch (InterruptedException ie) {
 				ie.printStackTrace() ;
 			} catch (Exception e) {
@@ -139,6 +140,37 @@ public class API implements Runnable {
 			throw new DocumentException( e.toString() ) ;                 
         }   	
     }
+
+
+    public static SyncRequest get_sync_request(String key) throws DocumentException {
+        System.out.println( "Get Document: " + key ) ;
+        Document doc = KEYMAP_CACHE.get( key ) ;
+        if ( doc == null || doc.record == null )
+            throw new DocumentException( "Document Not Found: " + key ) ;
+        String record_key = doc.record ;
+        SM db = SMFactory.getInstance() ;
+        SM.OID record_id ;
+        SM.Record found ;
+        record_id = db.getOID( record_key.getBytes() ) ;
+        try {
+            found = db.fetch( record_id ) ;
+            byte[] bytes = found.getBytes() ;
+            String jsonText = new String(bytes) ;
+            System.out.println( "Document Found: " + key ) ;    
+            SyncRequest sync = new SyncRequest() ;
+            sync.key = doc.key ;
+            sync.json = jsonText ;
+            sync.vclock = doc.vclock ;
+            sync.command = "create" ;
+            return sync ;
+        } catch (SM.NotFoundException nfe) {
+            System.out.println( "Document Found: " + key ) ;    
+            throw new DocumentException( "Document Not Found: " + key ) ;   
+        } catch (Exception e) {
+            throw new DocumentException( e.toString() ) ;                 
+        }       
+    }
+
 
 
     public static void update_document( String key, String value ) throws DocumentException {

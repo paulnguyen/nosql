@@ -130,7 +130,9 @@ public class AdminServer extends Application {
     public Restlet createInboundRoot() {
         Router router = new Router(getContext()) ;      
         router.attach( "/", PingResource.class ) ;
-        router.attach( "/node", NodeResource.class ) ;    
+        router.attach( "/node", NodeResource.class ) ;   
+        router.attach( "/sync", SyncResource.class ) ;
+        router.attach( "/sync/{key}", SyncResource.class ) ;         
         return router;
     }
 

@@ -401,6 +401,119 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "http://localhost:8888/sync/129871497",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/sync/129871497",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"sync",
+								"129871497"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8888/sync (Create)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        null,\n        null,\n        null,\n        null,\n        null\n    ],\n    \"command\": \"create\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/sync/129871497",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"sync",
+								"129871497"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8888/sync (Update)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        \"api_node_1:2\",\n        \"api_node_2:1\",\n        \"api_node_3:1\",\n        \"api_node_4:1\",\n        \"api_node_5:1\"\n    ],\n    \"command\": \"update\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/sync/129871497",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"sync",
+								"129871497"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8888/sync (Delete)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        \"api_node_1:2\",\n        \"api_node_2:1\",\n        \"api_node_3:1\",\n        \"api_node_4:1\",\n        \"api_node_5:1\"\n    ],\n    \"command\": \"delete\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/sync/129871497",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"sync",
+								"129871497"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
