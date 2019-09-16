@@ -1,0 +1,14 @@
+{
+	"id": "927aae0b-43b1-4313-89b3-56a8e914c412",
+	"name": "9002",
+	"values": [
+		{
+			"key": "port",
+			"value": "9002",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-09-15T23:13:12.857Z",
+	"_postman_exported_using": "Postman/7.3.6"
+}

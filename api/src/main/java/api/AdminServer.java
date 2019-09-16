@@ -45,6 +45,10 @@ public class AdminServer extends Application {
             System.out.println("Hostname : " + hostname);
             my_ip = ip.toString() ;
             my_host = hostname.toString() ;
+            Node node = new Node() ;
+            node.id = my_host ;
+            node.name = "localhost" ;
+            nodes.put( my_host, node ) ; 
         } catch (Exception e) {
             System.out.println( e ) ;
         }

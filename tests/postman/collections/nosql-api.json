@@ -10,6 +10,23 @@
 			"item": [
 				{
 					"name": "http://localhost:9090/db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d66d963-b67c-4ab8-832b-99f056e7b5e5",
+								"exec": [
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.globals.set( \"record_key\", jsonData.key);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -58,7 +75,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/db/F20C116116AEB540F353770C80A45BE6",
+							"raw": "http://localhost:9090/db/{{record_key}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -66,7 +83,7 @@
 							"port": "9090",
 							"path": [
 								"db",
-								"F20C116116AEB540F353770C80A45BE6"
+								"{{record_key}}"
 							]
 						}
 					},
@@ -89,7 +106,7 @@
 							"raw": "{\n    \"quiz\": {\n        \"sport\": {\n            \"q1\": {\n                \"question\": \"Which one is correct team name in NBA?\",\n                \"options\": [\n                    \"New York Bulls\",\n                    \"Los Angeles Kings\",\n                    \"Golden State Warriros\",\n                    \"Huston Rocket\"\n                ],\n                \"answer\": \"Huston Rocket\"\n            }\n        },\n        \"maths\": {\n            \"q1\": {\n                \"question\": \"5 + 7 = ?\",\n                \"options\": [\n                    \"10\",\n                    \"11\",\n                    \"12\",\n                    \"13\"\n                ],\n                \"answer\": \"12\"\n            },\n            \"q2\": {\n                \"question\": \"12 - 8 = ?\",\n                \"options\": [\n                    \"1\",\n                    \"2\",\n                    \"3\",\n                    \"4\"\n                ],\n                \"answer\": \"4\"\n            }\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:9090/db/134D25F935066887E4DBFA8062797681",
+							"raw": "http://localhost:9090/db/{{record_key}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -97,7 +114,7 @@
 							"port": "9090",
 							"path": [
 								"db",
-								"134D25F935066887E4DBFA8062797681"
+								"{{record_key}}"
 							]
 						}
 					},
@@ -120,7 +137,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/db/134D25F935066887E4DBFA8062797681",
+							"raw": "http://localhost:9090/db/{{record_key}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -128,7 +145,7 @@
 							"port": "9090",
 							"path": [
 								"db",
-								"134D25F935066887E4DBFA8062797681"
+								"{{record_key}}"
 							]
 						}
 					},
@@ -305,17 +322,33 @@
 			"name": "ADMIN",
 			"item": [
 				{
+					"name": "http://localhost:9090",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090"
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "http://localhost:8888",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8004",
+							"raw": "http://localhost:8888",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8004"
+							"port": "8888"
 						}
 					},
 					"response": []
@@ -368,54 +401,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "http://localhost:9090",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:9090",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9090"
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:800X",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8001",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8001"
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:900X",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:9001",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9001"
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -445,7 +430,7 @@
 			"name": "TEST",
 			"item": [
 				{
-					"name": "http://localhost:9004",
+					"name": "Check Key Map",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -464,12 +449,12 @@
 							"raw": "{\n    \"glossary\": {\n        \"title\": \"example glossary\",\n\t\t\"GlossDiv\": {\n            \"title\": \"S\",\n\t\t\t\"GlossList\": {\n                \"GlossEntry\": {\n                    \"ID\": \"SGML\",\n\t\t\t\t\t\"SortAs\": \"SGML\",\n\t\t\t\t\t\"GlossTerm\": \"Standard Generalized Markup Language\",\n\t\t\t\t\t\"Acronym\": \"SGML\",\n\t\t\t\t\t\"Abbrev\": \"ISO 8879:1986\",\n\t\t\t\t\t\"GlossDef\": {\n                        \"para\": \"A meta-markup language, used to create markup languages such as DocBook.\",\n\t\t\t\t\t\t\"GlossSeeAlso\": [\"GML\", \"XML\"]\n                    },\n\t\t\t\t\t\"GlossSee\": \"markup\"\n                }\n            }\n        }\n    }\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost:9004/api",
+							"raw": "http://localhost:{{port}}/api",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9004",
+							"port": "{{port}}",
 							"path": [
 								"api"
 							]
@@ -478,7 +463,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:9004/api/129871497",
+					"name": "Create Document",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -494,12 +479,12 @@
 							"raw": "{\n    \"glossary\": {\n        \"title\": \"example glossary\",\n\t\t\"GlossDiv\": {\n            \"title\": \"S\",\n\t\t\t\"GlossList\": {\n                \"GlossEntry\": {\n                    \"ID\": \"SGML\",\n\t\t\t\t\t\"SortAs\": \"SGML\",\n\t\t\t\t\t\"GlossTerm\": \"Standard Generalized Markup Language\",\n\t\t\t\t\t\"Acronym\": \"SGML\",\n\t\t\t\t\t\"Abbrev\": \"ISO 8879:1986\",\n\t\t\t\t\t\"GlossDef\": {\n                        \"para\": \"A meta-markup language, used to create markup languages such as DocBook.\",\n\t\t\t\t\t\t\"GlossSeeAlso\": [\"GML\", \"XML\"]\n                    },\n\t\t\t\t\t\"GlossSee\": \"markup\"\n                }\n            }\n        }\n    }\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost:9004/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9004",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -509,7 +494,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:9004/api/129871497",
+					"name": "Get Document",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -528,12 +513,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9004/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9004",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -543,7 +528,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:9004/api/129871497",
+					"name": "Update Document",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -559,12 +544,12 @@
 							"raw": "{\n    \"quiz\": {\n        \"sport\": {\n            \"q1\": {\n                \"question\": \"Which one is correct team name in NBA?\",\n                \"options\": [\n                    \"New York Bulls\",\n                    \"Los Angeles Kings\",\n                    \"Golden State Warriros\",\n                    \"Huston Rocket\"\n                ],\n                \"answer\": \"Huston Rocket\"\n            }\n        },\n        \"maths\": {\n            \"q1\": {\n                \"question\": \"5 + 7 = ?\",\n                \"options\": [\n                    \"10\",\n                    \"11\",\n                    \"12\",\n                    \"13\"\n                ],\n                \"answer\": \"12\"\n            },\n            \"q2\": {\n                \"question\": \"12 - 8 = ?\",\n                \"options\": [\n                    \"1\",\n                    \"2\",\n                    \"3\",\n                    \"4\"\n                ],\n                \"answer\": \"4\"\n            }\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:9004/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9004",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -574,7 +559,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:9004/api/129871497",
+					"name": "Delete Document",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -590,12 +575,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9004/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9004",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"

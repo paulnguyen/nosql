@@ -98,6 +98,7 @@ do
 	echo "============================================" ;
 	echo "         D O C K E R     A D M I N          " ;
 	echo "============================================" ;
+	echo " "
 	echo "[i] images     - Show Docker Images         " ;
 	echo "[p] ps         - Show Running Containers    " ;
 	echo "[r] prune      - Remove Unused Images       " ;

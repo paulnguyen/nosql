@@ -1,0 +1,14 @@
+{
+	"id": "b5a61cc8-d511-4689-b69e-fc6a62360f05",
+	"name": "9090",
+	"values": [
+		{
+			"key": "port",
+			"value": "9090",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-09-15T23:25:48.492Z",
+	"_postman_exported_using": "Postman/7.3.6"
+}

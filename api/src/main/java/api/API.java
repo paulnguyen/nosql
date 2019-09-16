@@ -99,9 +99,11 @@ public class API implements Runnable {
 	    	doc.key = key ;
             AdminServer server = AdminServer.getInstance() ;
             String my_host = server.getMyHostname() ;
+            System.out.println( "My Host Name: " + my_host ) ;
             doc.vclock[0] = my_host ;
             String my_version = my_host + ":" + Integer.toString(1) ;
             int my_index = server.nodeIndex( my_host ) ;
+            System.out.println( "Node Index: " + my_index ) ;
             doc.vclock[my_index] = my_version ;
 	    	KEYMAP_CACHE.put( key, doc ) ;
 	    	doc.json = value ;

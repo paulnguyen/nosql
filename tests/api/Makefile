@@ -53,7 +53,7 @@ partition1:
 	docker exec -it api_node_1 bash /srv/patch5.sh
 
 test1:
-	newman run nosql-test-1.json --reporters cli,json --reporter-json-export nosql-test-1.json
+	newman run tests/nosql-test-1.json --reporters cli,json --reporter-json-export output/nosql-test-1.json
 
 reset:
 	docker exec -it api_node_1 cp /etc/hosts.sav /etc/hosts
