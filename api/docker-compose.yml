@@ -11,6 +11,7 @@ services:
       - 8001-8005:8888
     environment:
       - CLUSTER_NAME=NOSQL
+      - CAP_MODE=AP
       
 volumes:
   schemas:
