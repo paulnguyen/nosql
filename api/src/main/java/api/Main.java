@@ -1,6 +1,7 @@
 package api ;
 
 import nojava.* ;
+import java.util.Map ;
 
 public class Main {
 
@@ -17,6 +18,12 @@ public class Main {
         new Thread(pings).start();              // start Ping Checks Thread to monitor cluster status
         Sync syncs = new Sync() ;
         new Thread(syncs).start() ;             // start Syncs Thread to Sync Changes in cluster
+
+        // dump out environment variables
+        Map<String, String> env = System.getenv();
+        System.out.println( "CLUSTER_NAME = " + env.get("CLUSTER_NAME") ) ;
+        System.out.println( "CAP_MODE = " + env.get("CAP_MODE") ) ;
+        System.out.println( "VERSION = " + env.get("VERSION") ) ;
 
     }
 

@@ -19,11 +19,6 @@
 
     https://studio.restlet.com
 
-## Cloud9 Test End Points
-
-    https://docs.c9.io/docs/run-an-application
-    http://localhost:8080/restlet/hello
-    https://design-paulnguyen.c9users.io/restlet/hello
 
 ## Gradle Build Tool
     
@@ -33,7 +28,7 @@
 ## Gradle Install via SDK MAN
 
     curl -s https://get.sdkman.io | bash
-    sdk install gradle 3.1
+    sdk install gradle 4.9
 
 ## Gradle for Java
 
