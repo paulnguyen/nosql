@@ -1,2 +1,1 @@
-# nosql vclock project
-
+# NoSQL vClock Project
