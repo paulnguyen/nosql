@@ -12,6 +12,7 @@ services:
     environment:
       - CLUSTER_NAME=NOSQL
       - CAP_MODE=AP
+      - VERSION=MAIN
       
 volumes:
   schemas:
