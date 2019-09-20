@@ -112,6 +112,7 @@ public class AdminServer extends Application {
         Node node = nodes.get( id ) ;
         String name = node.name ;
         String URL = "http://"+name+":8888" ;
+        System.out.println( URL ) ;
         ClientResource resource = new ClientResource( URL ) ;
         /* Create a Client with the socketTimout parameter for HttpClient and "attach"
            it to the ClientResource. */
