@@ -28,7 +28,7 @@ shell5:
 	docker exec -it api_node_5 bash 
 
 
-startup: 
+startup: network-create
 	docker-compose scale node=5
 	sleep 5
 	docker exec -it api_node_1 cp /etc/hosts /etc/hosts.sav
