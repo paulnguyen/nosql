@@ -1,0 +1,14 @@
+{
+	"id": "390165fa-c809-44f5-82e2-2f12b42c9aeb",
+	"name": "8002",
+	"values": [
+		{
+			"key": "port",
+			"value": "8002",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-09-15T23:12:53.856Z",
+	"_postman_exported_using": "Postman/7.3.6"
+}

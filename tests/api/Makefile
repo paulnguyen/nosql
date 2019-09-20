@@ -28,7 +28,7 @@ shell5:
 	docker exec -it api_node_5 bash 
 
 
-startup: network-create
+startup: 
 	docker-compose scale node=5
 	sleep 5
 	docker exec -it api_node_1 cp /etc/hosts /etc/hosts.sav
@@ -41,7 +41,6 @@ startup: network-create
 
 teardown:
 	docker-compose down
-	docker network prune
 
 partition1:
 	docker exec -it api_node_2 bash /srv/patch1.sh

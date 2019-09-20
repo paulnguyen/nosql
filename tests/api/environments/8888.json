@@ -1,0 +1,14 @@
+{
+	"id": "f3c1c81c-d933-48a5-9133-489d30802fed",
+	"name": "8888",
+	"values": [
+		{
+			"key": "port",
+			"value": "8888",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-09-15T23:26:00.833Z",
+	"_postman_exported_using": "Postman/7.3.6"
+}

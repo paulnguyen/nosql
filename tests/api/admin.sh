@@ -106,6 +106,9 @@ do
 	echo " " 
 	echo "[u] startup    - Startup NoSQL Cluster      " ;
 	echo "[d] teardown   - Teardown NoSQL Cluster     " ;
+	echo " "
+	echo "   create-net  - Create Cluster Network     " ;
+	echo "   delete-net  - Delete Cluster Network     " ;
 	echo " " 
 	echo "[X] Exit Menu                               " ;
 	echo " "
@@ -118,7 +121,12 @@ do
 		r|R|prune)		echo " " ; docker_stop_all; docker_rmi_unused ; okay_pause ;;
 		u|U|startup)	echo " " ; make startup ; okay_pause ;;
 		d|D|teardown)	echo " " ; make teardown ; okay_pause ;;
+		create-net)		echo " " ; make network-create ; okay_pause ;;
+		delete-net)		echo " " ; make network-prune ; okay_pause ;;
 		x|X) 			clear ; OPT="X" ; echo "Exiting " ;; 
 	esac
 done
+
+
+
 
