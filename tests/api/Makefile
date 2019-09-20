@@ -41,6 +41,7 @@ startup: network-create
 
 teardown:
 	docker-compose down
+	docker network prune
 
 partition1:
 	docker exec -it api_node_2 bash /srv/patch1.sh
