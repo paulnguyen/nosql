@@ -173,7 +173,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"glossary\": {\n        \"title\": \"example glossary\",\n\t\t\"GlossDiv\": {\n            \"title\": \"S\",\n\t\t\t\"GlossList\": {\n                \"GlossEntry\": {\n                    \"ID\": \"SGML\",\n\t\t\t\t\t\"SortAs\": \"SGML\",\n\t\t\t\t\t\"GlossTerm\": \"Standard Generalized Markup Language\",\n\t\t\t\t\t\"Acronym\": \"SGML\",\n\t\t\t\t\t\"Abbrev\": \"ISO 8879:1986\",\n\t\t\t\t\t\"GlossDef\": {\n                        \"para\": \"A meta-markup language, used to create markup languages such as DocBook.\",\n\t\t\t\t\t\t\"GlossSeeAlso\": [\"GML\", \"XML\"]\n                    },\n\t\t\t\t\t\"GlossSee\": \"markup\"\n                }\n            }\n        }\n    }\n}\n"
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:9090/api",
@@ -439,15 +439,14 @@
 							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        null,\n        null,\n        null,\n        null,\n        null\n    ],\n    \"command\": \"create\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8888/sync/129871497",
+							"raw": "http://localhost:8888/sync",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"sync",
-								"129871497"
+								"sync"
 							]
 						}
 					},
@@ -501,15 +500,14 @@
 							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        \"api_node_1:2\",\n        \"api_node_2:1\",\n        \"api_node_3:1\",\n        \"api_node_4:1\",\n        \"api_node_5:1\"\n    ],\n    \"command\": \"delete\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8888/sync/129871497",
+							"raw": "http://localhost:8888/sync",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"sync",
-								"129871497"
+								"sync"
 							]
 						}
 					},
