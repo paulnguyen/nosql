@@ -80,14 +80,17 @@ public class AdminServer extends Application {
         else return 0 ;
     }
 
-    public void registerNode( String id, String name ) {
+    public void registerNode( String id, String name, String admin_port, String api_port ) {
         // register node name
         Node node = new Node() ;
         node.id = id ;
         node.name = name ;
+        node.admin_port = admin_port ;
+        node.api_port = api_port ;
         nodes.put( id, node ) ;     
         System.out.println( "Register Node: " + id + " as: " + name ) ;     
     }
+
 
     public Collection<Node> getNodes() {
         return nodes.values() ;

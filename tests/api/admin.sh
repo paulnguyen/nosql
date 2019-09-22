@@ -99,16 +99,16 @@ do
 	echo "         D O C K E R     A D M I N          " ;
 	echo "============================================" ;
 	echo " "
-	echo "[i] images     - Show Docker Images         " ;
-	echo "[p] ps         - Show Running Containers    " ;
-	echo "[r] prune      - Remove Unused Images       " ;
-	echo "[c] cleanup    - Remove Local Images        " ;
+	echo "[i]  images      - Show Docker Images       " ;
+	echo "[p]  ps          - Show Running Containers  " ;
+	echo "[r]  prune       - Remove Unused Images     " ;
+	echo "[c]  cleanup     - Remove Local Images      " ;
 	echo " " 
-	echo "[u] startup    - Startup NoSQL Cluster      " ;
-	echo "[d] teardown   - Teardown NoSQL Cluster     " ;
+	echo "[u]  startup     - Startup NoSQL Cluster    " ;
+	echo "[d]  teardown    - Teardown NoSQL Cluster   " ;
 	echo " "
-	echo "   create-net  - Create Cluster Network     " ;
-	echo "   delete-net  - Delete Cluster Network     " ;
+	echo "[cn] create-net  - Create Cluster Network   " ;
+	echo "[dn] delete-net  - Delete Cluster Network   " ;
 	echo " " 
 	echo "[X] Exit Menu                               " ;
 	echo " "
@@ -121,8 +121,8 @@ do
 		r|R|prune)		echo " " ; docker_stop_all; docker_rmi_unused ; okay_pause ;;
 		u|U|startup)	echo " " ; make startup ; okay_pause ;;
 		d|D|teardown)	echo " " ; make teardown ; okay_pause ;;
-		create-net)		echo " " ; make network-create ; okay_pause ;;
-		delete-net)		echo " " ; make network-prune ; okay_pause ;;
+		cn|create-net)	echo " " ; make network-create ; okay_pause ;;
+		dn|delete-net)	echo " " ; make network-prune ; okay_pause ;;
 		x|X) 			clear ; OPT="X" ; echo "Exiting " ;; 
 	esac
 done

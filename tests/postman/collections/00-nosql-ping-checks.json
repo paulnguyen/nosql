@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "af5ac223-8049-4e28-bbe3-e7843b4f6226",
-		"name": "nosql-test-1",
+		"name": "00-nosql-ping-checks",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

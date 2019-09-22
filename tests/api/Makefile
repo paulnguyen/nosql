@@ -52,8 +52,8 @@ partition1:
 	docker exec -it api_node_1 bash /srv/patch4.sh
 	docker exec -it api_node_1 bash /srv/patch5.sh
 
-test1:
-	newman run tests/nosql-test-1.json --reporters cli,json --reporter-json-export output/nosql-test-1.json
+ping-test:
+	newman run tests/00-nosql-ping-checks.json -r cli,html --reporter-html-export output
 
 reset:
 	docker exec -it api_node_1 cp /etc/hosts.sav /etc/hosts

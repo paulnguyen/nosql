@@ -12,11 +12,11 @@ do
 	echo " "
 	echo "id:$id name:$name api_port:$api_port admin_port:$admin_port"
 	echo " "
-	curl -X POST http://localhost:8001/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\"}"
-	curl -X POST http://localhost:8002/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\"}"
-	curl -X POST http://localhost:8003/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\"}"
-	curl -X POST http://localhost:8004/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\"}"
-	curl -X POST http://localhost:8005/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\"}"
+	curl -X POST http://localhost:8001/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\", \"admin_port\" : \"$admin_port\", \"api_port\" : \"$api_port\"}"
+	curl -X POST http://localhost:8002/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\", \"admin_port\" : \"$admin_port\", \"api_port\" : \"$api_port\"}"
+	curl -X POST http://localhost:8003/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\", \"admin_port\" : \"$admin_port\", \"api_port\" : \"$api_port\"}"
+	curl -X POST http://localhost:8004/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\", \"admin_port\" : \"$admin_port\", \"api_port\" : \"$api_port\"}"
+	curl -X POST http://localhost:8005/node -H 'Content-Type: application/json' -d "{ \"id\" : \"$id\", \"name\" : \"$name\", \"admin_port\" : \"$admin_port\", \"api_port\" : \"$api_port\"}"
 	echo " "
 done
 

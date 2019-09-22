@@ -22,7 +22,7 @@ public class NodeResource extends ServerResource {
         JacksonRepresentation<Node> nodeRep = new JacksonRepresentation<Node> ( rep, Node.class ) ;
         Node node = nodeRep.getObject() ;
         try { 
-                admin.registerNode( node.id, node.name ) ;
+                admin.registerNode( node.id, node.name, node.admin_port, node.api_port ) ;
                 return new JacksonRepresentation<Node>(node) ;
         }
         catch ( Exception e ) {
