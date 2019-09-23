@@ -106,6 +106,7 @@ do
 	echo " " 
 	echo "[u]  startup     - Startup NoSQL Cluster    " ;
 	echo "[d]  teardown    - Teardown NoSQL Cluster   " ;
+	echo "[t]  runtests    - Run NoSQL Test Suite     " ;
 	echo " "
 	echo "[cn] create-net  - Create Cluster Network   " ;
 	echo "[dn] delete-net  - Delete Cluster Network   " ;
@@ -123,6 +124,7 @@ do
 		d|D|teardown)	echo " " ; make teardown ; okay_pause ;;
 		cn|create-net)	echo " " ; make network-create ; okay_pause ;;
 		dn|delete-net)	echo " " ; make network-prune ; okay_pause ;;
+		t|runtests)		echo " " ; ./runtests.sh ; okay_pause ;;
 		x|X) 			clear ; OPT="X" ; echo "Exiting " ;; 
 	esac
 done

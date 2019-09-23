@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "4a4b0ccd-814f-442e-ba65-28fc32de4813",
+		"name": "1.1-nosql-one-to-many-create",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "node-9001",
+			"item": [
+				{
+					"name": "Create Key 1 Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"message\" : \"Doc from Node on Port 9001\" }\n"
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/key1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"key1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "node-9002",
+			"item": [
+				{
+					"name": "Create Key 2 Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"message\" : \"Doc from Node on Port 9002\" }\n"
+						},
+						"url": {
+							"raw": "http://localhost:9002/api/key2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"api",
+								"key2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "node-9003",
+			"item": [
+				{
+					"name": "Create Key 3 Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"message\" : \"Doc from Node on Port 9003\" }\n"
+						},
+						"url": {
+							"raw": "http://localhost:9003/api/key3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9003",
+							"path": [
+								"api",
+								"key3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "node-9004",
+			"item": [
+				{
+					"name": "Create Key 4 Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"message\" : \"Doc from Node on Port 9004\" }\n"
+						},
+						"url": {
+							"raw": "http://localhost:9004/api/key4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"api",
+								"key4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "node-9005",
+			"item": [
+				{
+					"name": "Create Key 5 Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"message\" : \"Doc from Node on Port 9005\" }\n"
+						},
+						"url": {
+							"raw": "http://localhost:9005/api/key5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9005",
+							"path": [
+								"api",
+								"key5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

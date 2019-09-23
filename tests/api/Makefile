@@ -1,4 +1,7 @@
-all: teardown
+all: teardown clean
+
+clean:
+	rm -f output/*
 
 network-ls:
 	docker network ls
@@ -37,7 +40,7 @@ startup: network-create
 	docker exec -it api_node_4 cp /etc/hosts /etc/hosts.sav
 	docker exec -it api_node_5 cp /etc/hosts /etc/hosts.sav	
 	sleep 5
-	config.sh
+	./config.sh
 
 teardown:
 	docker-compose down
@@ -54,6 +57,9 @@ partition1:
 
 ping-test:
 	newman run tests/00-nosql-ping-checks.json -r cli,html --reporter-html-export output
+
+test:
+	./runtests.sh
 
 reset:
 	docker exec -it api_node_1 cp /etc/hosts.sav /etc/hosts
