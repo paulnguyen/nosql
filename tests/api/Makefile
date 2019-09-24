@@ -56,7 +56,7 @@ partition1:
 	docker exec -it api_node_1 bash /srv/patch5.sh
 
 ping-test:
-	newman run tests/00-nosql-ping-checks.json -r cli,html --reporter-html-export output
+	newman run tests/00-nosql-ping-checks.json -r cli
 
 test:
 	./runtests.sh

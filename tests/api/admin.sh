@@ -96,20 +96,21 @@ do
 	clear
 	echo ""
 	echo "============================================" ;
-	echo "         D O C K E R     A D M I N          " ;
+	echo "         N O S Q L    C O N S O L E         " ;
 	echo "============================================" ;
 	echo " "
 	echo "[i]  images      - Show Docker Images       " ;
 	echo "[p]  ps          - Show Running Containers  " ;
-	echo "[r]  prune       - Remove Unused Images     " ;
 	echo "[c]  cleanup     - Remove Local Images      " ;
 	echo " " 
 	echo "[u]  startup     - Startup NoSQL Cluster    " ;
 	echo "[d]  teardown    - Teardown NoSQL Cluster   " ;
 	echo "[t]  runtests    - Run NoSQL Test Suite     " ;
 	echo " "
+	echo "[pt] ping-test   - Check Cluster Network    " ;
 	echo "[cn] create-net  - Create Cluster Network   " ;
 	echo "[dn] delete-net  - Delete Cluster Network   " ;
+	echo "[pr] prune       - Remove Unused Images     " ;
 	echo " " 
 	echo "[X] Exit Menu                               " ;
 	echo " "
@@ -119,12 +120,13 @@ do
 		i|images)	    echo " " ; docker_images ; okay_pause ;;
 		p|ps) 			echo " " ; docker_ps ; okay_pause ;;
 		c|C|cleanup) 	echo " " ; docker_stop_all; docker_rmi_all ; okay_pause ;;
-		r|R|prune)		echo " " ; docker_stop_all; docker_rmi_unused ; okay_pause ;;
 		u|U|startup)	echo " " ; make startup ; okay_pause ;;
 		d|D|teardown)	echo " " ; make teardown ; okay_pause ;;
 		cn|create-net)	echo " " ; make network-create ; okay_pause ;;
 		dn|delete-net)	echo " " ; make network-prune ; okay_pause ;;
+		pr|R|prune)		echo " " ; docker_stop_all; docker_rmi_unused ; okay_pause ;;
 		t|runtests)		echo " " ; ./runtests.sh ; okay_pause ;;
+		pt|ping-test)	echo " " ; make ping-test ; okay_pause ;;
 		x|X) 			clear ; OPT="X" ; echo "Exiting " ;; 
 	esac
 done
