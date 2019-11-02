@@ -105,7 +105,6 @@ do
 	echo " " 
 	echo "[u]  startup     - Startup NoSQL Cluster    " ;
 	echo "[d]  teardown    - Teardown NoSQL Cluster   " ;
-	echo "[t]  runtests    - Run NoSQL Test Suite     " ;
 	echo " "
 	echo "[pt] ping-test   - Check Cluster Network    " ;
 	echo "[cn] create-net  - Create Cluster Network   " ;
@@ -125,7 +124,6 @@ do
 		cn|create-net)	echo " " ; make network-create ; okay_pause ;;
 		dn|delete-net)	echo " " ; make network-prune ; okay_pause ;;
 		pr|R|prune)		echo " " ; docker_stop_all; docker_rmi_unused ; okay_pause ;;
-		t|runtests)		echo " " ; ./runtests.sh ; okay_pause ;;
 		pt|ping-test)	echo " " ; make ping-test ; okay_pause ;;
 		x|X) 			clear ; OPT="X" ; echo "Exiting " ;; 
 	esac

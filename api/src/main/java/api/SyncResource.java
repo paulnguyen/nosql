@@ -18,17 +18,28 @@ public class SyncResource extends ServerResource {
 
     @Post
     public Representation post_action (Representation rep) throws IOException {
+
         AdminServer admin = AdminServer.getInstance() ;
-        JacksonRepresentation<SyncRequest> syncRep = new JacksonRepresentation<SyncRequest> ( rep, SyncRequest.class ) ;
+
+        JacksonRepresentation<SyncRequest> syncRep = 
+            new JacksonRepresentation<SyncRequest> ( rep, SyncRequest.class ) ;
+
+        // System.out.println( "Sync Message: " + rep.getText() ) ;
+
         try { 
+
             SyncRequest syncObject = syncRep.getObject() ;
+
             if ( syncObject == null ) {
+                System.out.println( "*** Sync Message Null ***" ) ;
                 setStatus( org.restlet.data.Status.SERVER_ERROR_INTERNAL ) ;
                 Status status = new Status() ;
                 status.status = "error" ;
                 status.message = "Server Error, Try Again Later." ;
                 return new JacksonRepresentation<Status>(status) ;                
             } else {
+                System.out.println( "Sync Object: " + syncObject ) ;
+
                 switch( syncObject.command ) {
                     case "create":
                         syncObject.message = "Document Created Successfully." ;
@@ -43,9 +54,14 @@ public class SyncResource extends ServerResource {
                         setStatus( org.restlet.data.Status.CLIENT_ERROR_BAD_REQUEST ) ;
                         syncObject.message = "Sync Command Not Recognized."  ;
                 }
+
+                API.sync_document( syncObject ) ;
+                System.out.println( syncObject.message ) ;
                 return new JacksonRepresentation<SyncRequest>(syncObject) ;    
             }
+
         } catch ( Exception e ) {
+            e.printStackTrace(); 
             setStatus( org.restlet.data.Status.SERVER_ERROR_INTERNAL ) ;
             Status status = new Status() ;
             status.status = "error" ;

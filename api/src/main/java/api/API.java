@@ -1,5 +1,10 @@
 package api ;
 
+import nojava.* ;
+
+import java.util.* ;
+import java.io.* ;
+
 import java.util.concurrent.BlockingQueue ;
 import java.util.concurrent.LinkedBlockingQueue ;
 import java.util.concurrent.ConcurrentHashMap ;
@@ -9,9 +14,6 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
 import org.json.* ;
-import nojava.* ;
-import java.io.* ;
-
 import org.restlet.resource.*;
 import org.restlet.representation.* ;
 import org.restlet.ext.json.* ;
@@ -50,7 +52,11 @@ public class API implements Runnable {
             	doc.record = record_key ;
             	doc.json = "" ;
             	KEYMAP_CACHE.put( doc.key, doc ) ;    
+                System.out.println( "Created Document: " + doc.key ) ;
                 
+                // sync nodes
+                AdminServer.syncDocument( doc.key, "create" ) ; 
+
 			} catch (InterruptedException ie) {
 				ie.printStackTrace() ;
 			} catch (Exception e) {
@@ -77,6 +83,7 @@ public class API implements Runnable {
 		}
     }
 
+
     public static void load_hashmap() {
 		 try {
 		     FileInputStream fis = new FileInputStream("index.db") ;
@@ -90,6 +97,61 @@ public class API implements Runnable {
 		     System.out.println("Class not found");
 		     c.printStackTrace() ;
 		  }
+    }
+
+
+   public static void sync_document(SyncRequest sync) throws DocumentException {
+
+        String key = sync.key ;
+        String value = sync.json ;
+        String[] vclock = sync.vclock ;
+        String command = sync.command ;
+
+        try {
+
+            AdminServer server = AdminServer.getInstance() ;
+            String my_host = server.getMyHostname() ;
+            String my_version = my_host + ":" + Integer.toString(1) ;
+            int my_index = server.nodeIndex( my_host ) ;
+
+            switch ( command ) {
+                case "create":
+                    Document doc = new Document() ;
+                    doc.vclock[0] = my_host ;
+                    doc.vclock[1] = vclock[1] ;
+                    doc.vclock[2] = vclock[2] ;
+                    doc.vclock[3] = vclock[3] ;
+                    doc.vclock[4] = vclock[4] ;
+                    doc.vclock[5] = vclock[5] ;
+                    doc.vclock[my_index] = my_host + ":" + Integer.toString(1) ;
+                    SM db = SMFactory.getInstance() ;
+                    SM.OID record_id  ;
+                    SM.Record record  ;
+                    String jsonText = value ;
+                    int size = jsonText.getBytes().length ;
+                    record = new SM.Record( size ) ;
+                    record.setBytes( jsonText.getBytes() ) ;
+                    record_id = db.store( record ) ;
+                    String record_key = new String(record_id.toBytes()) ;
+                    doc.record = record_key ;
+                    doc.json = "" ;
+                    doc.key = key ;
+                    KEYMAP_CACHE.put( key, doc ) ;
+                    System.out.println( "SYNC: Created Document Key: " + key 
+                                        + " Record: " + record_key 
+                                        + " vClock: " + Arrays.toString(doc.vclock) 
+                                    ) ;
+                    break ;
+                case "update":
+                    break ;
+                case "delete":
+                    break ;
+            }   
+
+        } catch (Exception e) {
+            throw new DocumentException( e.toString() ) ;
+        }
+
     }
 
 
@@ -161,7 +223,7 @@ public class API implements Runnable {
             sync.key = doc.key ;
             sync.json = jsonText ;
             sync.vclock = doc.vclock ;
-            sync.command = "create" ;
+            sync.command = "" ; // set by caller
             return sync ;
         } catch (SM.NotFoundException nfe) {
             System.out.println( "Document Found: " + key ) ;    
@@ -170,7 +232,6 @@ public class API implements Runnable {
             throw new DocumentException( e.toString() ) ;                 
         }       
     }
-
 
 
     public static void update_document( String key, String value ) throws DocumentException {
@@ -202,6 +263,8 @@ public class API implements Runnable {
             int version = Integer.parseInt(splits[1])+1 ;
             String new_version = my_host + ":" + Integer.toString(version) ;            
             doc.vclock[my_index] = new_version ;
+            // sync nodes
+            AdminServer.syncDocument( key, "update" ) ; 
 			return ;             
         } catch (SM.NotFoundException nfe) {
 			throw new DocumentException( "Document Not Found: " + key ) ;
@@ -209,6 +272,7 @@ public class API implements Runnable {
            	throw new DocumentException( e.toString() ) ;           
         }
     }
+
 
     public static void delete_document( String key ) throws DocumentException {
     	System.out.println( "Delete Document: " + key ) ;
@@ -222,6 +286,9 @@ public class API implements Runnable {
 		SM.OID record_id = db.getOID( record_key.getBytes() ) ;
        	try {
             db.delete( record_id ) ;
+            // sync nodes
+            AdminServer.syncDocument( key, "delete" ) ; 
+            // remove key map
             KEYMAP_CACHE.remove( key ) ;
 			System.out.println( "Document Deleted: " + key ) ;
         } catch (SM.NotFoundException nfe) {

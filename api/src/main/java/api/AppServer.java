@@ -12,6 +12,10 @@ public class AppServer extends Application {
             server.getServers().add(Protocol.HTTP, 9090) ;
             server.getDefaultHost().attach(new AppServer()) ;
             server.start() ;
+
+            API api = new API() ;
+            new Thread(api).start();                // start API Thread to Create New Documents
+
         } catch ( Exception e ) {
             System.out.println( e ) ;
         }
