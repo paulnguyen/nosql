@@ -111,7 +111,6 @@ public class API implements Runnable {
 
             AdminServer server = AdminServer.getInstance() ;
             String my_host = server.getMyHostname() ;
-            String my_version = my_host + ":" + Integer.toString(1) ;
             int my_index = server.nodeIndex( my_host ) ;
 
             switch ( command ) {
@@ -123,7 +122,7 @@ public class API implements Runnable {
                     doc.vclock[3] = vclock[3] ;
                     doc.vclock[4] = vclock[4] ;
                     doc.vclock[5] = vclock[5] ;
-                    doc.vclock[my_index] = my_host + ":" + Integer.toString(1) ;
+                    doc.vclock[my_index] = my_host + ":" + Integer.toString(0) ;
                     SM db = SMFactory.getInstance() ;
                     SM.OID record_id  ;
                     SM.Record record  ;
