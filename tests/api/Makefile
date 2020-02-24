@@ -30,9 +30,16 @@ shell4:
 shell5:
 	docker exec -it api_node_5 bash 
 
-
 startup: network-create
-	docker-compose scale node=5
+	docker-compose up -d --scale node=1
+	sleep 1
+	docker-compose up -d --scale node=2
+	sleep 1
+	docker-compose up -d --scale node=3
+	sleep 1
+	docker-compose up -d --scale node=4
+	sleep 1
+	docker-compose up -d --scale node=5
 	sleep 5
 	docker exec -it api_node_1 bash /srv/backup.sh
 	docker exec -it api_node_2 bash /srv/backup.sh
@@ -49,7 +56,7 @@ ping-test:
 	newman run tests/00-nosql-ping-checks.json -r cli
 
 test:
-	./runtests.sh
+	./runtest1.sh
 
 reset:
 	docker exec -it api_node_1 cp /etc/hosts.sav /etc/hosts

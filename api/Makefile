@@ -57,7 +57,18 @@ docker-ps-ports:
 	 docker ps --all --format "table {{.Names}}\t{{.Ports}}\t"
 
 nosql-up: network-create
-	docker-compose scale node=5
+	docker-compose up -d --scale node=5
+
+nosql-up-serialized: network-create
+	docker-compose up -d --scale node=1
+	sleep 1
+	docker-compose up -d --scale node=2
+	sleep 1
+	docker-compose up -d --scale node=3
+	sleep 1
+	docker-compose up -d --scale node=4
+	sleep 1
+	docker-compose up -d --scale node=5
 
 nosql-down:
 	docker-compose down
