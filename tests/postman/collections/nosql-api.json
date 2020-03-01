@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3a87862f-38b1-46da-9b6b-50f12e0474d4",
+		"_postman_id": "ea11e8bb-0f20-4822-81f9-01e70b4773df",
 		"name": "nosql-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -42,12 +42,12 @@
 							"raw": "{\n    \"glossary\": {\n        \"title\": \"example glossary\",\n\t\t\"GlossDiv\": {\n            \"title\": \"S\",\n\t\t\t\"GlossList\": {\n                \"GlossEntry\": {\n                    \"ID\": \"SGML\",\n\t\t\t\t\t\"SortAs\": \"SGML\",\n\t\t\t\t\t\"GlossTerm\": \"Standard Generalized Markup Language\",\n\t\t\t\t\t\"Acronym\": \"SGML\",\n\t\t\t\t\t\"Abbrev\": \"ISO 8879:1986\",\n\t\t\t\t\t\"GlossDef\": {\n                        \"para\": \"A meta-markup language, used to create markup languages such as DocBook.\",\n\t\t\t\t\t\t\"GlossSeeAlso\": [\"GML\", \"XML\"]\n                    },\n\t\t\t\t\t\"GlossSee\": \"markup\"\n                }\n            }\n        }\n    }\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost:9090/db",
+							"raw": "http://localhost:{{port}}/db",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"db"
 							]
@@ -75,12 +75,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/db/{{record_key}}",
+							"raw": "http://localhost:{{port}}/db/{{record_key}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"db",
 								"{{record_key}}"
@@ -106,12 +106,12 @@
 							"raw": "{\n    \"quiz\": {\n        \"sport\": {\n            \"q1\": {\n                \"question\": \"Which one is correct team name in NBA?\",\n                \"options\": [\n                    \"New York Bulls\",\n                    \"Los Angeles Kings\",\n                    \"Golden State Warriros\",\n                    \"Huston Rocket\"\n                ],\n                \"answer\": \"Huston Rocket\"\n            }\n        },\n        \"maths\": {\n            \"q1\": {\n                \"question\": \"5 + 7 = ?\",\n                \"options\": [\n                    \"10\",\n                    \"11\",\n                    \"12\",\n                    \"13\"\n                ],\n                \"answer\": \"12\"\n            },\n            \"q2\": {\n                \"question\": \"12 - 8 = ?\",\n                \"options\": [\n                    \"1\",\n                    \"2\",\n                    \"3\",\n                    \"4\"\n                ],\n                \"answer\": \"4\"\n            }\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:9090/db/{{record_key}}",
+							"raw": "http://localhost:{{port}}/db/{{record_key}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"db",
 								"{{record_key}}"
@@ -137,12 +137,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/db/{{record_key}}",
+							"raw": "http://localhost:{{port}}/db/{{record_key}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"db",
 								"{{record_key}}"
@@ -151,11 +151,28 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "API",
 			"item": [
+				{
+					"name": "http://localhost:9090",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}"
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "http://localhost:9090/api",
 					"protocolProfileBehavior": {
@@ -176,12 +193,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/api",
+							"raw": "http://localhost:{{port}}/api",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"api"
 							]
@@ -206,12 +223,12 @@
 							"raw": "{\n    \"glossary\": {\n        \"title\": \"example glossary\",\n\t\t\"GlossDiv\": {\n            \"title\": \"S\",\n\t\t\t\"GlossList\": {\n                \"GlossEntry\": {\n                    \"ID\": \"SGML\",\n\t\t\t\t\t\"SortAs\": \"SGML\",\n\t\t\t\t\t\"GlossTerm\": \"Standard Generalized Markup Language\",\n\t\t\t\t\t\"Acronym\": \"SGML\",\n\t\t\t\t\t\"Abbrev\": \"ISO 8879:1986\",\n\t\t\t\t\t\"GlossDef\": {\n                        \"para\": \"A meta-markup language, used to create markup languages such as DocBook.\",\n\t\t\t\t\t\t\"GlossSeeAlso\": [\"GML\", \"XML\"]\n                    },\n\t\t\t\t\t\"GlossSee\": \"markup\"\n                }\n            }\n        }\n    }\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost:9090/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -240,12 +257,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -271,12 +288,12 @@
 							"raw": "{\n    \"quiz\": {\n        \"sport\": {\n            \"q1\": {\n                \"question\": \"Which one is correct team name in NBA?\",\n                \"options\": [\n                    \"New York Bulls\",\n                    \"Los Angeles Kings\",\n                    \"Golden State Warriros\",\n                    \"Huston Rocket\"\n                ],\n                \"answer\": \"Huston Rocket\"\n            }\n        },\n        \"maths\": {\n            \"q1\": {\n                \"question\": \"5 + 7 = ?\",\n                \"options\": [\n                    \"10\",\n                    \"11\",\n                    \"12\",\n                    \"13\"\n                ],\n                \"answer\": \"12\"\n            },\n            \"q2\": {\n                \"question\": \"12 - 8 = ?\",\n                \"options\": [\n                    \"1\",\n                    \"2\",\n                    \"3\",\n                    \"4\"\n                ],\n                \"answer\": \"4\"\n            }\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:9090/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -302,12 +319,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:9090/api/129871497",
+							"raw": "http://localhost:{{port}}/api/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "{{port}}",
 							"path": [
 								"api",
 								"129871497"
@@ -316,39 +333,24 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "ADMIN",
 			"item": [
-				{
-					"name": "http://localhost:9090",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:9090",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9090"
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "http://localhost:8888",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8888",
+							"raw": "http://localhost:{{port}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888"
+							"port": "{{port}}"
 						}
 					},
 					"response": []
@@ -359,12 +361,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8888/node",
+							"raw": "http://localhost:{{port}}/node",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888",
+							"port": "{{port}}",
 							"path": [
 								"node"
 							]
@@ -389,12 +391,12 @@
 							"raw": "{\n\t\"id\" : \"b82689d81d1c\",\n\t\"name\" : \"api_nodes_4\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8888/node",
+							"raw": "http://localhost:{{port}}/node",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888",
+							"port": "{{port}}",
 							"path": [
 								"node"
 							]
@@ -408,12 +410,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8888/sync/129871497",
+							"raw": "http://localhost:{{port}}/sync/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888",
+							"port": "{{port}}",
 							"path": [
 								"sync",
 								"129871497"
@@ -439,12 +441,12 @@
 							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        null,\n        null,\n        null,\n        null,\n        null\n    ],\n    \"command\": \"create\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8888/sync",
+							"raw": "http://localhost:{{port}}/sync",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888",
+							"port": "{{port}}",
 							"path": [
 								"sync"
 							]
@@ -469,12 +471,12 @@
 							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        \"api_node_1:2\",\n        \"api_node_2:1\",\n        \"api_node_3:1\",\n        \"api_node_4:1\",\n        \"api_node_5:1\"\n    ],\n    \"command\": \"update\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8888/sync/129871497",
+							"raw": "http://localhost:{{port}}/sync/129871497",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888",
+							"port": "{{port}}",
 							"path": [
 								"sync",
 								"129871497"
@@ -500,12 +502,12 @@
 							"raw": "{\n    \"key\": \"129871497\",\n    \"json\": \"{\\\"glossary\\\":{\\\"title\\\":\\\"example glossary\\\",\\\"GlossDiv\\\":{\\\"GlossList\\\":{\\\"GlossEntry\\\":{\\\"GlossTerm\\\":\\\"Standard Generalized Markup Language\\\",\\\"GlossSee\\\":\\\"markup\\\",\\\"SortAs\\\":\\\"SGML\\\",\\\"GlossDef\\\":{\\\"para\\\":\\\"A meta-markup language, used to create markup languages such as DocBook.\\\",\\\"GlossSeeAlso\\\":[\\\"GML\\\",\\\"XML\\\"]},\\\"ID\\\":\\\"SGML\\\",\\\"Acronym\\\":\\\"SGML\\\",\\\"Abbrev\\\":\\\"ISO 8879:1986\\\"}},\\\"title\\\":\\\"S\\\"}}}\",\n    \"vclock\": [\n        \"M288421QVHV2L:1\",\n        \"api_node_1:2\",\n        \"api_node_2:1\",\n        \"api_node_3:1\",\n        \"api_node_4:1\",\n        \"api_node_5:1\"\n    ],\n    \"command\": \"delete\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8888/sync",
+							"raw": "http://localhost:{{port}}/sync",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8888",
+							"port": "{{port}}",
 							"path": [
 								"sync"
 							]
@@ -513,29 +515,8 @@
 					},
 					"response": []
 				}
-			]
-		},
-		{
-			"name": "SANDBOX",
-			"item": [
-				{
-					"name": " https://cmpe281.getsandbox.com (ping)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://cmpe281.getsandbox.com",
-							"protocol": "https",
-							"host": [
-								"cmpe281",
-								"getsandbox",
-								"com"
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "TEST",
@@ -700,7 +681,9 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
