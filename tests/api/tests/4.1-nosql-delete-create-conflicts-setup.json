@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "c4e35bc5-d62a-4d3b-bc13-7d3ffbf411e5",
+		"name": "4.1-nosql-delete-create-conflicts-setup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Config Check on 8001 to Get Ports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"  //console.log(obj.name);",
+							"  //console.log(obj.api_port);",
+							"  //console.log(obj.admin_port);",
+							"  pm.globals.set(obj.name, obj.api_port);",
+							"  pm.globals.set(obj.name+\"_admin\", obj.admin_port);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document on Node 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\" : \"Original Delete/Create Conflict Document\" }\n"
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_1}}/api/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1}}",
+					"path": [
+						"api",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document on Node 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\" : \"Original Delete/Create Conflict Document\" }\n"
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_1}}/api/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1}}",
+					"path": [
+						"api",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3c2494db-112e-48fe-abd1-4839a4afd986",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a585a900-dbb8-4060-a7c5-b973d595ba7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

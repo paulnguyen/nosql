@@ -30,6 +30,7 @@ shell4:
 shell5:
 	docker exec -it api_node_5 bash 
 
+
 startup: network-create
 	docker-compose up -d --scale node=1
 	sleep 1

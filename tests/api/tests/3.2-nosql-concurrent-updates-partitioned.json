@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "dff6953f-7e24-43ee-b9cd-e99abe0b6dda",
+		"name": "3.2-nosql-concurrent-updates-partitioned",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Config Check on 8001 to Get Ports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"  //console.log(obj.name);",
+							"  //console.log(obj.api_port);",
+							"  //console.log(obj.admin_port);",
+							"  pm.globals.set(obj.name, obj.api_port);",
+							"  pm.globals.set(obj.name+\"_admin\", obj.admin_port);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Document on Node 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\" : \"Concurrent Update Document - Node #2 Update\" }\n"
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_2}}/api/concurrent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_2}}",
+					"path": [
+						"api",
+						"concurrent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Document on Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\" : \"Concurrent Update Document - Node #3 Update\" }\n"
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_3}}/api/concurrent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3}}",
+					"path": [
+						"api",
+						"concurrent"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3c2494db-112e-48fe-abd1-4839a4afd986",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a585a900-dbb8-4060-a7c5-b973d595ba7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

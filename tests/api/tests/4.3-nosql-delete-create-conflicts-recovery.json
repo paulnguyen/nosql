@@ -1,0 +1,1189 @@
+{
+	"info": {
+		"_postman_id": "61fc63a5-fc99-450a-a1ec-e03b737e0cde",
+		"name": "4.3-nosql-delete-create-conflicts-recovery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Config Check on 8001 to Get Ports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"  //console.log(obj.name);",
+							"  //console.log(obj.api_port);",
+							"  //console.log(obj.admin_port);",
+							"  pm.globals.set(obj.name, obj.api_port);",
+							"  pm.globals.set(obj.name+\"_admin\", obj.admin_port);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Resolved on Node #1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(4) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_1_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Resolved on Node #2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(4) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_2_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_2_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Resolved on Node #3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(4) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_3_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Resolved on Node #4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(4) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_4_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Resolved on Node #5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(4) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_5_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_5_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.expect(jsonData.message).to.have.string('Delete/Create Conflict Document - Node #3 Recreated');",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_1}}/api/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1}}",
+					"path": [
+						"api",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.expect(jsonData.message).to.have.string('Delete/Create Conflict Document - Node #3 Recreated');",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_2}}/api/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_2}}",
+					"path": [
+						"api",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.expect(jsonData.message).to.have.string('Delete/Create Conflict Document - Node #3 Recreated');",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_3}}/api/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3}}",
+					"path": [
+						"api",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.expect(jsonData.message).to.have.string('Delete/Create Conflict Document - Node #3 Recreated');",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_4}}/api/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4}}",
+					"path": [
+						"api",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.expect(jsonData.message).to.have.string('Delete/Create Conflict Document - Node #3 Recreated');",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_5}}/api/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_5}}",
+					"path": [
+						"api",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff6f032-e150-48a5-84dd-dfc87075f478",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_1_admin}}/sync/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1_admin}}",
+					"path": [
+						"sync",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab072702-0914-4783-bedc-36542be5d923",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_2_admin}}/sync/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_2_admin}}",
+					"path": [
+						"sync",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66b8e73c-abe9-49da-b12a-abf44d67973f",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_3_admin}}/sync/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3_admin}}",
+					"path": [
+						"sync",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81eb02cb-cd44-4b9a-8d62-101bd4abda93",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_4_admin}}/sync/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4_admin}}",
+					"path": [
+						"sync",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3368b9b5-aa86-43b2-9e5f-c43518786313",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_5_admin}}/sync/createdelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_5_admin}}",
+					"path": [
+						"sync",
+						"createdelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {",
+							"    pm.response.to.have.status(400) || pm.response.to.have.status(404); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_1}}/api/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1}}",
+					"path": [
+						"api",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {",
+							"    pm.response.to.have.status(400) || pm.response.to.have.status(404); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_2}}/api/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_2}}",
+					"path": [
+						"api",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {",
+							"    pm.response.to.have.status(400) || pm.response.to.have.status(404); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_3}}/api/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3}}",
+					"path": [
+						"api",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {",
+							"    pm.response.to.have.status(400) || pm.response.to.have.status(404); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_4}}/api/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4}}",
+					"path": [
+						"api",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {",
+							"    pm.response.to.have.status(400) || pm.response.to.have.status(404); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_5}}/api/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_5}}",
+					"path": [
+						"api",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff6f032-e150-48a5-84dd-dfc87075f478",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_1_admin}}/sync/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_1_admin}}",
+					"path": [
+						"sync",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff6f032-e150-48a5-84dd-dfc87075f478",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_2_admin}}/sync/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_2_admin}}",
+					"path": [
+						"sync",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff6f032-e150-48a5-84dd-dfc87075f478",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_3_admin}}/sync/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3_admin}}",
+					"path": [
+						"sync",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff6f032-e150-48a5-84dd-dfc87075f478",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_4_admin}}/sync/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4_admin}}",
+					"path": [
+						"sync",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document vClock from Node 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff6f032-e150-48a5-84dd-dfc87075f478",
+						"exec": [
+							"",
+							"var json = pm.response.json() ;",
+							"var vclock = \"[ \";",
+							"json.vclock.forEach(function(v,i,a) {",
+							"    vclock = vclock + i + \":\" + v + \"  \" ;",
+							"});",
+							"vclock = vclock + \"]\"",
+							"console.log( vclock ) ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_5_admin}}/sync/deletecreate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_5_admin}}",
+					"path": [
+						"sync",
+						"deletecreate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3c2494db-112e-48fe-abd1-4839a4afd986",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a585a900-dbb8-4060-a7c5-b973d595ba7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

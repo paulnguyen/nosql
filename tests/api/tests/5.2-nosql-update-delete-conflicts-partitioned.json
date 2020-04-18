@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "e0087d62-2860-4bae-9a32-6a103766cca6",
+		"name": "5.2-nosql-update-delete-conflicts-partitioned",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Config Check on 8001 to Get Ports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"  //console.log(obj.name);",
+							"  //console.log(obj.api_port);",
+							"  //console.log(obj.admin_port);",
+							"  pm.globals.set(obj.name, obj.api_port);",
+							"  pm.globals.set(obj.name+\"_admin\", obj.admin_port);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Mode on Node #3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(0) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_3_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Partition Mode on Node #4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e1b9885-9f74-4fd0-b1d9-590f67527ba1",
+						"exec": [
+							"pm.test(\"Successful Config Check\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var nodes_up = 0 ;",
+							"var json = pm.response.json();",
+							"json.forEach(function(obj) {",
+							"    console.log( obj.name + \": \" + obj.status ) ;",
+							"    if ( obj.status == \"up\" )",
+							"        nodes_up = nodes_up + 1 ;",
+							"});",
+							"console.log( \"# Nodes Up: \" + nodes_up ) ;",
+							"pm.expect(nodes_up).to.equal(0) ;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{api_node_4_admin}}/node",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4_admin}}",
+					"path": [
+						"node"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Document on Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_3}}/api/updatedelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3}}",
+					"path": [
+						"api",
+						"updatedelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 400 or 404\", function () {",
+							"    pm.response.to.have.status(400) || pm.response.to.have.status(404); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_3}}/api/updatedelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_3}}",
+					"path": [
+						"api",
+						"updatedelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delay for 2 Seconds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\" : \"Node Isolation Document\" }\n"
+				},
+				"url": {
+					"raw": "https://postman-echo.com/delay/2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Document on Node 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\" : \"Update/Delete Conflict Document - Updated on Node #4\" }"
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_4}}/api/updatedelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4}}",
+					"path": [
+						"api",
+						"updatedelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document on Node 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b56ebdc-72a8-444e-a64a-d4afafc8ef9e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.expect(jsonData.message).to.have.string(\"Update/Delete Conflict Document - Updated on Node #4\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{api_node_4}}/api/updatedelete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{api_node_4}}",
+					"path": [
+						"api",
+						"updatedelete"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3c2494db-112e-48fe-abd1-4839a4afd986",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a585a900-dbb8-4060-a7c5-b973d595ba7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
