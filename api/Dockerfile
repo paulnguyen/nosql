@@ -1,4 +1,4 @@
-FROM openjdk
+FROM openjdk:8
 EXPOSE 9090 8888
 ADD ./build/libs/nosql-all.jar /srv/nosql-all.jar
 ADD ./mdump.sh /srv/mdump.sh
@@ -11,9 +11,8 @@ ADD ./patch5.sh /srv/patch5.sh
 ADD ./backup.sh /srv/backup.sh
 ADD ./reset.sh /srv/reset.sh
 RUN chmod +x /srv/*.sh
-RUN yum -y install util-linux
-RUN yum -y install iputils
-RUN yum -y install vim 
+RUN apt update
+RUN apt install vim -y
 WORKDIR /srv
 CMD java -cp /srv/nosql-all.jar api.Main > /srv/nosql.log
 
